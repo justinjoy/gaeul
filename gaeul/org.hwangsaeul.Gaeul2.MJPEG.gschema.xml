@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<schemalist>
+
+  <schema id="org.hwangsaeul.Gaeul2.MJPEG" path="/org/hwangsaeul/Gaeul2/MJPEG/">
+    <key name="uid" type="s">
+      <default>"randomized-string"</default>
+    </key>
+  </schema>
+
+</schemalist>

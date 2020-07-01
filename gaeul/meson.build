@@ -2,17 +2,20 @@ source_h = [
   'gaeul.h',
   'application.h',
   'source-application.h',
+  'mjpeg-application.h',
 ]
 
 source_c = [
   'gaeul.c',
   'application.c',
   'source-application.c',
+  'mjpeg-application.c',
 ]
 
 gsettings_schemas = [
   'org.hwangsaeul.Gaeul2.Source.gschema.xml',
   'org.hwangsaeul.Gaeul2.Relay.gschema.xml',
+  'org.hwangsaeul.Gaeul2.MJPEG.gschema.xml',
 ]
 
 install_data(gsettings_schemas,
@@ -21,13 +24,17 @@ install_data(gsettings_schemas,
 gaeul_schemas = gnome.compile_schemas(depend_files: gsettings_schemas)
 gaeul_schemas_dir = meson.current_build_dir()
 
+gstreamer_dep = dependency ('gstreamer-1.0', version: '>= 1.14.0')
+gstreamer_pbutils_dep = dependency ('gstreamer-pbutils-1.0')
+jsonrpc_glib_dep = dependency ('jsonrpc-glib-1.0')
+
 libgaeul = library(
   'gaeul-@0@'.format(apiversion),
   source_c, gaeul_schemas,
   version: libversion,
   soversion: soversion,
   include_directories: gaeul_incs,
-  dependencies: [ gio_dep, gaeguli_dep ],
+  dependencies: [ gio_dep, soup_dep, gaeguli_dep, gstreamer_dep, gstreamer_pbutils_dep, jsonrpc_glib_dep ],
   c_args: [ '-DG_LOG_DOMAIN="GAEUL2"' ],
   link_args: common_ldflags,
   install: true

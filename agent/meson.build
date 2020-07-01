@@ -1,5 +1,6 @@
 agents = [
   [ 'GAEUL2-SA', 'source-agent'],
+  [ 'GAEUL2-MJ', 'mjpeg-agent'],
 ]
 
 foreach agent: agents
